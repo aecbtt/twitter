@@ -6,9 +6,7 @@ const application_root=__dirname,
 const ctrl = require('./controllers');
 
 var app = express();
-app.listen(8080, function() {
-	console.log("the server is running!");
-});
+
 app.use(express.static(path.join(application_root,"public")));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
@@ -40,6 +38,8 @@ app.get('/stream/graph', ctrl.sendGraph);
 
 ctrl.warmup.once("warmup", _ => {
    console.log("Web server running on port 8080");
-   app.listen(8080);
+   app.listen(8080, function() {
+	   console.log("the server is running!");
+	});
 });
 
